@@ -15,24 +15,24 @@ var updateLossStatement = document.getElementById("lossStatement");
 
 document.onkeyup = function () {
 
-  var userGuess = event.key;
-  console.log(computerGuess);
+    var userGuess = event.key;
+    console.log(computerGuess);
+    if (userGuess !== computerGuess) {
+        if (lives > 0 && winCounter !== 1) {
+            lives -= 1;
+            guessList.push(userGuess);
+            updateLivesCounter.textContent = lives;
+            updateGuessList.innerHTML = guessList;
+        } if (lives === 0) {
+            lossCounter = 1;
+            updateLossCounter.textContent = lossCounter;
+            //   updateLossStatement.textContent = "Oooo so closee!!! Refresh your page to play again!"
+        }
+    } else if (lossCounter !== 1) {
+        winCounter = 1;
+        updateWinCounter.textContent = winCounter;
 
-  if (userGuess !== computerGuess) {
-    if (lives > 0 && winCounter !== 1) {
-      lives -= 1;
-      guessList.push(userGuess);
-      updateLivesCounter.textContent = lives;
-      updateGuessList.innerHTML = guessList;
-    } else if (winCounter !== 1) {
-      lossCounter = 1;
-      updateLossCounter.textContent = lossCounter;
-      updateLossStatement.textContent = "Oooo so closee!!! Refresh your page to play again!"
+        // updateWinStatement.textContent = "You did it!!! Refresh your page to play again!";
     }
-  } else if (lossCounter !== 1) {
-    winCounter = 1;
-    updateWinCounter.textContent = winCounter;
-    updateWinStatement.textContent = "You did it!!! Refresh your page to play again!"
-  }
 
 }
