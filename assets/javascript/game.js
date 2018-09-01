@@ -1,33 +1,38 @@
 var winCounter = 0;
 var lossCounter = 0;
-var guessOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-var computerChoice = Math.floor(Math.random() * 26);
-var guessesLeft = 9;
-var computerGuess = guessOptions[computerChoice];
+var lives = 9;
 var guessList = [];
+var letterOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var computerChoice = Math.floor(Math.random() * 26);
+var computerGuess = letterOptions[computerChoice];
 
-var wins = document.getElementById("winner");
-wins.innerHTML = "Wins: " + winCounter;
+var updateWinCounter = document.getElementById("wins");
+var updateLossCounter = document.getElementById("losses");
+var updateLivesCounter = document.getElementById("livesLeft");
+var updateGuessList = document.getElementById("guessesSoFar");
+var updateWinStatement = document.getElementById("winStatement");
+var updateLossStatement = document.getElementById("lossStatement");
 
-var losses = document.getElementById("loser");
-losses.innerHTML = "Losses: " + lossCounter;
+document.onkeyup = function () {
 
-var guesses = document.getElementById("guessesSoFar");
-guesses.innerHTML = "Your guesses so far: " + guessList;
+  var userGuess = event.key;
+  console.log(computerGuess);
 
-var livesLeft = document.getElementById("lives");
-livesLeft.innerHTML = "Guesses Left: " + guessesLeft;
+  if (userGuess !== computerGuess) {
+    if (lives > 0 && winCounter !== 1) {
+      lives -= 1;
+      guessList.push(userGuess);
+      updateLivesCounter.textContent = lives;
+      updateGuessList.innerHTML = guessList;
+    } else if (winCounter !== 1) {
+      lossCounter = 1;
+      updateLossCounter.textContent = lossCounter;
+      updateLossStatement.textContent = "Oooo so closee!!! Refresh your page to play again!"
+    }
+  } else if (lossCounter !== 1) {
+    winCounter = 1;
+    updateWinCounter.textContent = winCounter;
+    updateWinStatement.textContent = "You did it!!! Refresh your page to play again!"
+  }
 
-document.onkeyup = function() {
-
-    
-    userGuess = event.key;
-    // console.log(userGuess)
-    // console.log(userGuess);
-    // console.log(computerGuess);
-    wins++;
 }
-
-
-
-// console.log(guessOptions[computerGuess]);
