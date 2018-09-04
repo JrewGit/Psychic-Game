@@ -26,7 +26,7 @@ document.onkeyup = function(event) {
   var userGuess = event.key;
   console.log(computerGuess);
   if (userGuess !== computerGuess) {
-    if (lives > 0) {
+    if ((lives > 0) && (guessList.indexOf(userGuess) === -1)) {
       lives -= 1;
       guessList.push(userGuess);
       updateLivesCounter.textContent = lives;
